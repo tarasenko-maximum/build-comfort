@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ООО «БИЛД КОМФОРТ» — оптовая продажа строительных материалов, импорт из Турции. Керамическая плитка, сантехника, строительные смеси, двери и окна.">
+    <title>Билд Комфорт — Строительные материалы из Турции оптом</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; font-size: 16px; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #333;
+            background: #f8f9fa;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        a { text-decoration: none; color: inherit; }
+        img { max-width: 100%; height: auto; display: block; }
+        ul { list-style: none; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* ===== COLORS ===== */
+        :root {
+            --navy: #1a2332;
+            --navy-light: #2a3a52;
+            --orange: #e67e22;
+            --orange-hover: #d35400;
+            --orange-light: #f39c12;
+            --white: #ffffff;
+            --gray-100: #f8f9fa;
+            --gray-200: #e9ecef;
+            --gray-300: #dee2e6;
+            --gray-400: #adb5bd;
+            --gray-600: #6c757d;
+            --gray-800: #343a40;
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.12);
+            --shadow-lg: 0 8px 40px rgba(0,0,0,0.16);
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4 { font-weight: 700; line-height: 1.2; }
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            color: var(--navy);
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--orange);
+            margin: 16px auto 0;
+            border-radius: 2px;
+        }
+        .section-title span { color: var(--orange); }
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray-600);
+            font-size: 1.05rem;
+            margin-top: -2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        /* ===== HEADER / NAV ===== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(26,35,50,0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 0 20px;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        .header.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--orange);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--white);
+        }
+        .logo span { color: var(--orange); }
+        .nav { display: flex; gap: 28px; align-items: center; }
+        .nav a {
+            color: rgba(255,255,255,0.8);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav a:hover, .nav a.active { color: var(--orange); }
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--orange);
+            transition: width 0.3s;
+        }
+        .nav a:hover::after, .nav a.active::after { width: 100%; }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+        }
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 3px;
+            background: var(--white);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--navy);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            z-index: 999;
+        }
+        .mobile-nav.open { display: flex; }
+        .mobile-nav a {
+            color: rgba(255,255,255,0.85);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+        .mobile-nav a:hover { color: var(--orange); }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--navy) 0%, #0f1722 50%, var(--navy-light) 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 100px 20px 80px;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(230,126,34,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(230,126,34,0.05) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            animation: fadeInUp 1s ease;
+        }
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(230,126,34,0.15);
+            border: 1px solid rgba(230,126,34,0.3);
+            border-radius: 50px;
+            color: var(--orange);
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 24px;
+            letter-spacing: 0.5px;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--white);
+            margin-bottom: 16px;
+            letter-spacing: -1px;
+        }
+        .hero h1 span { color: var(--orange); }
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 36px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        .hero-stat {
+            text-align: center;
+        }
+        .hero-stat-value {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--orange);
+        }
+        .hero-stat-label {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.6);
+            margin-top: 4px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 36px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: var(--orange);
+            color: var(--white);
+        }
+        .btn-primary:hover {
+            background: var(--orange-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(230,126,34,0.35);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        .btn-outline:hover {
+            border-color: var(--orange);
+            color: var(--orange);
+        }
+        .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+        /* ===== ABOUT ===== */
+        .about {
+            padding: 100px 0;
+            background: var(--white);
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .about-image {
+            background: linear-gradient(135deg, var(--navy), var(--navy-light));
+            border-radius: var(--radius);
+            padding: 40px;
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .about-image-content {
+            text-align: center;
+            color: var(--white);
+        }
+        .about-image-content .big-icon {
+            font-size: 4rem;
+            margin-bottom: 16px;
+        }
+        .about-image-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+        .about-image-content p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.95rem;
+        }
+        .about-text h2 { text-align: left; margin-bottom: 20px; }
+        .about-text h2::after { margin: 12px 0 0; }
+        .about-text p {
+            color: var(--gray-600);
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+        }
+        .about-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        .about-detail-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: var(--gray-100);
+            border-radius: var(--radius-sm);
+            font-size: 0.9rem;
+        }
+        .about-detail-item .detail-icon {
+            color: var(--orange);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .about-detail-item .detail-label {
+            color: var(--gray-600);
+            font-size: 0.8rem;
+        }
+        .about-detail-item .detail-value {
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        /* ===== PRODUCTS ===== */
+        .products {
+            padding: 100px 0;
+            background: var(--gray-100);
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 24px;
+        }
+        .product-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.4s;
+            box-shadow: var(--shadow-sm);
+            cursor: default;
+        }
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        .product-icon {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--orange-light), var(--orange));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 1.8rem;
+            transition: transform 0.4s;
+        }
+        .product-card:hover .product-icon { transform: scale(1.1) rotate(-5deg); }
+        .product-card h3 { font-size: 1.1rem; margin-bottom: 8px; color: var(--navy); }
+        .product-card p { font-size: 0.9rem; color: var(--gray-600); }
+
+        /* ===== PARTNERS ===== */
+        .partners {
+            padding: 100px 0;
+            background: var(--white);
+        }
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 30px;
+        }
+        .partner-card {
+            background: var(--gray-100);
+            border-radius: var(--radius);
+            padding: 28px 20px;
+            text-align: center;
+            transition: all 0.4s;
+            border: 1px solid transparent;
+        }
+        .partner-card:hover {
+            border-color: var(--orange);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+        .partner-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 16px;
+            background: var(--navy);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--white);
+            transition: 0.3s;
+        }
+        .partner-card:hover .partner-logo { background: var(--orange); }
+        .partner-card h3 { font-size: 1.05rem; color: var(--navy); margin-bottom: 6px; }
+        .partner-card p { font-size: 0.85rem; color: var(--gray-600); line-height: 1.5; }
+        .partner-country {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 4px 12px;
+            background: rgba(230,126,34,0.1);
+            color: var(--orange);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* ===== EMPLOYEES ===== */
+        .employees {
+            padding: 100px 0;
+            background: var(--gray-100);
+        }
+        .employees-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 28px;
+        }
+        .employee-card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 32px 20px;
+            text-align: center;
+            transition: all 0.4s;
+            box-shadow: var(--shadow-sm);
+        }
+        .employee-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+        .employee-avatar {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 16px;
+            background: var(--navy);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--white);
+            transition: 0.3s;
+        }
+        .employee-card:hover .employee-avatar { background: var(--orange); }
+        .employee-card h3 { font-size: 1.1rem; color: var(--navy); }
+        .employee-card .position {
+            color: var(--orange);
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin: 4px 0 8px;
+        }
+        .employee-card .desc {
+            font-size: 0.88rem;
+            color: var(--gray-600);
+        }
+
+        /* ===== APPLICATION FORM ===== */
+        .form-section {
+            padding: 100px 0;
+            background: var(--navy);
+            position: relative;
+            overflow: hidden;
+        }
+        .form-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(230,126,34,0.1) 0%, transparent 70%);
+        }
+        .form-section .section-title { color: var(--white); }
+        .form-section .section-title::after { background: var(--orange); }
+        .form-section .section-subtitle { color: rgba(255,255,255,0.6); }
+        .form-wrapper {
+            max-width: 580px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius);
+            padding: 40px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            color: rgba(255,255,255,0.85);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: var(--radius-sm);
+            color: var(--white);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: 0.3s;
+            outline: none;
+        }
+        .form-group input::placeholder { color: rgba(255,255,255,0.4); }
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: var(--orange);
+            background: rgba(255,255,255,0.12);
+            box-shadow: 0 0 0 3px rgba(230,126,34,0.15);
+        }
+        .form-group select option { color: var(--navy); }
+        .form-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--orange);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+        }
+        .form-submit:hover {
+            background: var(--orange-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(230,126,34,0.35);
+        }
+        .form-message {
+            display: none;
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: var(--radius-sm);
+            text-align: center;
+            font-weight: 500;
+        }
+        .form-message.success { display: block; background: rgba(46,204,113,0.15); color: #2ecc71; border: 1px solid rgba(46,204,113,0.3); }
+        .form-message.error { display: block; background: rgba(231,76,60,0.15); color: #e74c3c; border: 1px solid rgba(231,76,60,0.3); }
+
+        /* ===== CONTACTS ===== */
+        .contacts {
+            padding: 100px 0;
+            background: var(--white);
+        }
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+        .contacts-info h2 { text-align: left; margin-bottom: 24px; }
+        .contacts-info h2::after { margin: 12px 0 0; }
+        .contact-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+        .contact-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--gray-100);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .contact-item h4 { font-size: 0.95rem; color: var(--navy); margin-bottom: 2px; }
+        .contact-item p { font-size: 0.9rem; color: var(--gray-600); }
+        .contact-item a { color: var(--orange); }
+        .contact-item a:hover { text-decoration: underline; }
+        .map-placeholder {
+            width: 100%;
+            height: 350px;
+            background: var(--gray-100);
+            border-radius: var(--radius);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray-400);
+            font-size: 1rem;
+            border: 2px dashed var(--gray-300);
+            text-align: center;
+            padding: 20px;
+        }
+        .map-placeholder .map-icon { font-size: 3rem; margin-bottom: 12px; }
+        .map-placeholder p { font-size: 0.9rem; max-width: 250px; }
+
+        /* ===== CHAT WIDGET ===== */
+        .chat-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 900;
+            width: 60px;
+            height: 60px;
+            background: var(--orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--white);
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(230,126,34,0.4);
+            transition: all 0.3s;
+            border: none;
+        }
+        .chat-toggle:hover { transform: scale(1.1); background: var(--orange-hover); }
+        .chat-toggle .close-icon { display: none; }
+        .chat-toggle.active .chat-icon { display: none; }
+        .chat-toggle.active .close-icon { display: block; }
+
+        .chat-popup {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            z-index: 899;
+            width: 340px;
+            background: var(--white);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            display: none;
+            overflow: hidden;
+            animation: slideUp 0.3s ease;
+        }
+        .chat-popup.open { display: block; }
+        .chat-header {
+            background: var(--navy);
+            padding: 16px 20px;
+            color: var(--white);
+        }
+        .chat-header h3 { font-size: 1rem; }
+        .chat-header p { font-size: 0.8rem; color: rgba(255,255,255,0.7); }
+        .chat-body {
+            padding: 20px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .chat-message {
+            margin-bottom: 12px;
+            display: flex;
+        }
+        .chat-message.bot .bubble {
+            background: var(--gray-100);
+            color: var(--gray-800);
+            border-radius: 0 16px 16px 16px;
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            max-width: 85%;
+        }
+        .chat-message.user { justify-content: flex-end; }
+        .chat-message.user .bubble {
+            background: var(--orange);
+            color: var(--white);
+            border-radius: 16px 0 16px 16px;
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            max-width: 85%;
+        }
+        .chat-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .chat-option-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--gray-300);
+            background: var(--white);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: 0.3s;
+            font-family: inherit;
+            color: var(--gray-800);
+        }
+        .chat-option-btn:hover {
+            border-color: var(--orange);
+            background: rgba(230,126,34,0.05);
+        }
+        .chat-footer {
+            padding: 12px 20px;
+            border-top: 1px solid var(--gray-200);
+            font-size: 0.75rem;
+            text-align: center;
+            color: var(--gray-400);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--navy);
+            padding: 40px 0 20px;
+            color: rgba(255,255,255,0.7);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        .footer h4 { color: var(--white); margin-bottom: 16px; font-size: 1.05rem; }
+        .footer p, .footer li { font-size: 0.9rem; margin-bottom: 8px; }
+        .footer a { color: rgba(255,255,255,0.7); }
+        .footer a:hover { color: var(--orange); }
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        .footer-logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+        .footer-logo span { color: var(--orange); }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 968px) {
+            .about-grid { grid-template-columns: 1fr; gap: 40px; }
+            .contacts-grid { grid-template-columns: 1fr; gap: 40px; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+        @media (max-width: 768px) {
+            .nav { display: none; }
+            .hamburger { display: flex; }
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1rem; }
+            .hero-stats { gap: 24px; }
+            .hero-stat-value { font-size: 1.5rem; }
+            .section-title { font-size: 1.6rem; }
+            .about-details { grid-template-columns: 1fr; }
+            .products-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+            .partners-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+            .employees-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+            .chat-popup { width: calc(100% - 40px); right: 20px; bottom: 90px; }
+            .footer-grid { grid-template-columns: 1fr; }
+            .form-wrapper { padding: 24px; }
+        }
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 1.7rem; }
+            .hero-stats { flex-direction: column; gap: 16px; }
+            .products-grid { grid-template-columns: 1fr 1fr; }
+            .partners-grid { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header" id="header">
+        <div class="header-inner">
+            <a href="#hero" class="logo">
+                <div class="logo-icon">BC</div>
+                Билд<span>Комфорт</span>
+            </a>
+            <nav class="nav" id="nav">
+                <a href="#about">О компании</a>
+                <a href="#products">Продукция</a>
+                <a href="#partners">Партнёры</a>
+                <a href="#employees">Команда</a>
+                <a href="#form">Заявка</a>
+                <a href="#contacts">Контакты</a>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="Меню">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#about">О компании</a>
+        <a href="#products">Продукция</a>
+        <a href="#partners">Партнёры</a>
+        <a href="#employees">Команда</a>
+        <a href="#form">Заявка</a>
+        <a href="#contacts">Контакты</a>
+    </div>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-badge">🇹🇷 Прямые поставки из Турции</div>
+            <h1>ООО «БИЛД <span>КОМФОРТ</span>»</h1>
+            <p>Ведущий поставщик строительных материалов оптом. Импорт высококачественной продукции напрямую от ведущих турецких производителей.</p>
+            <div class="hero-buttons">
+                <a href="#form" class="btn btn-primary">Оставить заявку</a>
+                <a href="#products" class="btn btn-outline">Каталог продукции</a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-value">399 млн ₽</div>
+                    <div class="hero-stat-label">Выручка 2025</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">5+</div>
+                    <div class="hero-stat-label">Турецких партнёров</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-value">50+</div>
+                    <div class="hero-stat-label">Клиентов по РФ</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image fade-in">
+                    <div class="about-image-content">
+                        <div class="big-icon">🏗️</div>
+                        <h3>Билд Комфорт</h3>
+                        <p>Надёжность. Качество. Профессионализм.</p>
+                    </div>
+                </div>
+                <div class="about-text fade-in">
+                    <h2 class="section-title">О <span>компании</span></h2>
+                    <p><strong>ООО «БИЛД КОМФОРТ»</strong> — динамично развивающаяся компания на рынке оптовой торговли строительными материалами. Мы специализируемся на импорте и поставках широкого спектра строительных материалов премиального качества из Турции.</p>
+                    <p>Благодаря прямым контрактам с ведущими турецкими производителями, мы предлагаем нашим клиентам конкурентные цены, высокое качество продукции и надежные сроки поставок. Наш опыт и знание рынка позволяют формировать оптимальные предложения под любые потребности строительного бизнеса.</p>
+                    <div class="about-details">
+                        <div class="about-detail-item">
+                            <span class="detail-icon">🏛️</span>
+                            <div>
+                                <div class="detail-label">ИНН</div>
+                                <div class="detail-value">9723102040</div>
+                            </div>
+                        </div>
+                        <div class="about-detail-item">
+                            <span class="detail-icon">📋</span>
+                            <div>
+                                <div class="detail-label">ОГРН</div>
+                                <div class="detail-value">1207700249151</div>
+                            </div>
+                        </div>
+                        <div class="about-detail-item">
+                            <span class="detail-icon">📍</span>
+                            <div>
+                                <div class="detail-label">Адрес</div>
+                                <div class="detail-value">г. Москва, ул. Цимлянская, д. 3, к. 2</div>
+                            </div>
+                        </div>
+                        <div class="about-detail-item">
+                            <span class="detail-icon">👔</span>
+                            <div>
+                                <div class="detail-label">Генеральный директор</div>
+                                <div class="detail-value">Белков О.В.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PRODUCTS ===== -->
+    <section class="products" id="products">
+        <div class="container">
+            <h2 class="section-title fade-in">Каталог <span>продукции</span></h2>
+            <p class="section-subtitle fade-in">Широкий ассортимент строительных материалов напрямую из Турции</p>
+            <div class="products-grid">
+                <div class="product-card fade-in">
+                    <div class="product-icon">🧱</div>
+                    <h3>Керамическая плитка</h3>
+                    <p>Напольная и настенная плитка премиум-класса. Широкий выбор форматов, цветов и фактур.</p>
+                </div>
+                <div class="product-card fade-in">
+                    <div class="product-icon">🚿</div>
+                    <h3>Сантехника</h3>
+                    <p>Унитазы, раковины, смесители, ванны и душевые кабины от ведущих турецких брендов.</p>
+                </div>
+                <div class="product-card fade-in">
+                    <div class="product-icon">🧰</div>
+                    <h3>Строительные смеси</h3>
+                    <p>Цемент, штукатурка, затирки, клеевые составы и сухие смеси для любых видов работ.</p>
+                </div>
+                <div class="product-card fade-in">
+                    <div class="product-icon">🚪</div>
+                    <h3>Двери и окна</h3>
+                    <p>Входные и межкомнатные двери, оконные конструкции из ПВХ и алюминия.</p>
+                </div>
+                <div class="product-card fade-in">
+                    <div class="product-icon">🎨</div>
+                    <h3>Отделочные материалы</h3>
+                    <p>Обои, краски, лаки, декоративная штукатурка и другие материалы для финишной отделки.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PARTNERS ===== -->
+    <section class="partners" id="partners">
+        <div class="container">
+            <h2 class="section-title fade-in">Наши <span>партнёры</span></h2>
+            <p class="section-subtitle fade-in">Ведущие турецкие производители, с которыми мы сотрудничаем напрямую</p>
+            <div class="partners-grid">
+                <div class="partner-card fade-in">
+                    <div class="partner-logo">ECA</div>
+                    <h3>ECA</h3>
+                    <p>Один из крупнейших турецких производителей сантехники и систем отопления. Надёжность и качество с 1963 года.</p>
+                    <span class="partner-country">🇹🇷 Турция</span>
+                </div>
+                <div class="partner-card fade-in">
+                    <div class="partner-logo">KAL</div>
+                    <h3>Kalebodur</h3>
+                    <p>Ведущий производитель керамической плитки и керамогранита в Турции. Продукция представлена в 50+ странах мира.</p>
+                    <span class="partner-country">🇹🇷 Турция</span>
+                </div>
+                <div class="partner-card fade-in">
+                    <div class="partner-logo">VTR</div>
+                    <h3>VitrA</h3>
+                    <p>Премиальный бренд сантехники и керамической плитки. Часть крупнейшей турецкой промышленной группы Eczacıbaşı.</p>
+                    <span class="partner-country">🇹🇷 Турция</span>
+                </div>
+                <div class="partner-card fade-in">
+                    <div class="partner-logo">KLE</div>
+                    <h3>Kale</h3>
+                    <p>Крупнейший турецкий производитель керамики, сантехники и строительных материалов с многолетней историей.</p>
+                    <span class="partner-country">🇹🇷 Турция</span>
+                </div>
+                <div class="partner-card fade-in">
+                    <div class="partner-logo">PES</div>
+                    <h3>Pesina</h3>
+                    <p>Современный производитель сантехнического оборудования и аксессуаров для ванных комнат.</p>
+                    <span class="partner-country">🇹🇷 Турция</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EMPLOYEES ===== -->
+    <section class="employees" id="employees">
+        <div class="container">
+            <h2 class="section-title fade-in">Наша <span>команда</span></h2>
+            <p class="section-subtitle fade-in">Профессионалы, обеспечивающие высокий уровень сервиса</p>
+            <div class="employees-grid">
+                <div class="employee-card fade-in">
+                    <div class="employee-avatar">БО</div>
+                    <h3>Белков Олег Вениаминович</h3>
+                    <div class="position">Генеральный директор</div>
+                    <div class="desc">Руководство компанией, стратегия развития, ключевые партнёрства</div>
+                </div>
+                <div class="employee-card fade-in">
+                    <div class="employee-avatar">КД</div>
+                    <h3>Петров Алексей Игоревич</h3>
+                    <div class="position">Коммерческий директор</div>
+                    <div class="desc">Управление продажами, работа с ключевыми клиентами, развитие каналов сбыта</div>
+                </div>
+                <div class="employee-card fade-in">
+                    <div class="employee-avatar">МП</div>
+                    <h3>Соколова Мария Дмитриевна</h3>
+                    <div class="position">Менеджер по продажам</div>
+                    <div class="desc">Работа с заказами, консультация клиентов, оформление поставок</div>
+                </div>
+                <div class="employee-card fade-in">
+                    <div class="employee-avatar">МП</div>
+                    <h3>Кузнецов Дмитрий Сергеевич</h3>
+                    <div class="position">Менеджер по продажам</div>
+                    <div class="desc">Внешнеэкономическая деятельность, работа с турецкими поставщиками</div>
+                </div>
+                <div class="employee-card fade-in">
+                    <div class="employee-avatar">БУ</div>
+                    <h3>Иванова Елена Павловна</h3>
+                    <div class="position">Бухгалтер</div>
+                    <div class="desc">Финансовый учёт, налоговая отчётность, документооборот</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== APPLICATION FORM ===== -->
+    <section class="form-section" id="form">
+        <div class="container">
+            <h2 class="section-title fade-in">Оставить <span>заявку</span></h2>
+            <p class="section-subtitle fade-in">Заполните форму и наш менеджер свяжется с вами в ближайшее время</p>
+            <div class="form-wrapper fade-in">
+                <form id="applicationForm" onsubmit="return handleFormSubmit(event)">
+                    <div class="form-group">
+                        <label for="formName">Ваше имя *</label>
+                        <input type="text" id="formName" name="name" placeholder="Иван Иванов" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="formPhone">Номер телефона *</label>
+                        <input type="tel" id="formPhone" name="phone" placeholder="+7 (999) 123-45-67" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="formProduct">Интересующая продукция</label>
+                        <select id="formProduct" name="product">
+                            <option value="">— Выберите категорию —</option>
+                            <option value="Керамическая плитка">Керамическая плитка</option>
+                            <option value="Сантехника">Сантехника</option>
+                            <option value="Строительные смеси">Строительные смеси</option>
+                            <option value="Двери и окна">Двери и окна</option>
+                            <option value="Отделочные материалы">Отделочные материалы</option>
+                            <option value="Другое">Другое</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="formComment">Комментарий</label>
+                        <input type="text" id="formComment" name="comment" placeholder="Дополнительная информация">
+                    </div>
+                    <button type="submit" class="form-submit">Отправить заявку</button>
+                    <div class="form-message" id="formMessage"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACTS ===== -->
+    <section class="contacts" id="contacts">
+        <div class="container">
+            <div class="contacts-grid">
+                <div class="contacts-info fade-in">
+                    <h2 class="section-title">Контакты</h2>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h4>Адрес</h4>
+                            <p>г. Москва, ул. Цимлянская, д. 3, к. 2, помещ. 152п</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <h4>Телефон</h4>
+                            <p><a href="tel:+74951234567">+7 (495) 123-45-67</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <h4>Email</h4>
+                            <p><a href="mailto:info@buildcomfort.ru">info@buildcomfort.ru</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🕐</div>
+                        <div>
+                            <h4>Режим работы</h4>
+                            <p>Пн–Пт: 09:00 – 18:00<br>Сб–Вс: выходной</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📋</div>
+                        <div>
+                            <h4>Реквизиты</h4>
+                            <p>ИНН 9723102040 | ОГРН 1207700249151 | КПП 772301001</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contacts-map fade-in">
+                    <div class="map-placeholder">
+                        <div class="map-icon">🗺️</div>
+                        <h3 style="color: var(--gray-600); margin-bottom: 8px;">Карта проезда</h3>
+                        <p>г. Москва, ул. Цимлянская, д. 3, к. 2, помещ. 152п</p>
+                        <p style="margin-top: 12px; font-size: 0.8rem; color: var(--gray-400);">Интерактивная карта будет подключена</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="footer-logo">Билд<span>Комфорт</span></div>
+                    <p>Оптовая продажа строительных материалов. Импорт из Турции. Надёжность, качество, профессионализм с 2020 года.</p>
+                </div>
+                <div>
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="#about">О компании</a></li>
+                        <li><a href="#products">Продукция</a></li>
+                        <li><a href="#partners">Партнёры</a></li>
+                        <li><a href="#employees">Команда</a></li>
+                        <li><a href="#form">Заявка</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Контакты</h4>
+                    <ul>
+                        <li>Москва, ул. Цимлянская, д. 3</li>
+                        <li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li>
+                        <li><a href="mailto:info@buildcomfort.ru">info@buildcomfort.ru</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                © 2025 ООО «БИЛД КОМФОРТ». Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== CHAT WIDGET ===== -->
+    <button class="chat-toggle" id="chatToggle" aria-label="Открыть чат">
+        <span class="chat-icon">💬</span>
+        <span class="close-icon">✕</span>
+    </button>
+
+    <div class="chat-popup" id="chatPopup">
+        <div class="chat-header">
+            <h3>Консультант</h3>
+            <p>Выберите удобный способ связи</p>
+        </div>
+        <div class="chat-body" id="chatBody">
+            <div class="chat-message bot">
+                <div class="bubble">
+                    Здравствуйте! 👋<br>
+                    Чем мы можем вам помочь?<br>
+                    Выберите удобный мессенджер для связи:
+                </div>
+            </div>
+            <div class="chat-options">
+                <button class="chat-option-btn" onclick="openChat('whatsapp')">
+                    <span style="font-size:1.3rem;">💬</span>
+                    WhatsApp
+                </button>
+                <button class="chat-option-btn" onclick="openChat('telegram')">
+                    <span style="font-size:1.3rem;">✈️</span>
+                    Telegram
+                </button>
+                <button class="chat-option-btn" onclick="openChat('phone')">
+                    <span style="font-size:1.3rem;">📞</span>
+                    Позвонить нам
+                </button>
+            </div>
+        </div>
+        <div class="chat-footer">
+            Нажимая кнопку, вы соглашаетесь на обработку данных
+        </div>
+    </div>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        // === Mobile Menu ===
+        const hamburger = document.getElementById('hamburger');
+        const mobileNav = document.getElementById('mobileNav');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            mobileNav.classList.toggle('open');
+        });
+        mobileNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                mobileNav.classList.remove('open');
+            });
+        });
+
+        // === Header scroll effect ===
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // === Active nav link ===
+        const navLinks = document.querySelectorAll('#nav a, .mobile-nav a');
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const top = section.offsetTop - 120;
+                if (window.scrollY >= top) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+            });
+        });
+
+        // === Scroll Animation (Intersection Observer) ===
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // === Chat Widget ===
+        const chatToggle = document.getElementById('chatToggle');
+        const chatPopup = document.getElementById('chatPopup');
+        chatToggle.addEventListener('click', () => {
+            chatToggle.classList.toggle('active');
+            chatPopup.classList.toggle('open');
+        });
+
+        function openChat(type) {
+            const phone = '74951234567';
+            const msg = encodeURIComponent('Здравствуйте! Хочу узнать о продукции Билд Комфорт.');
+            let url = '';
+            if (type === 'whatsapp') {
+                url = 'https://wa.me/' + phone.replace(/[+\s-]/g, '') + '?text=' + msg;
+            } else if (type === 'telegram') {
+                url = 'https://t.me/BuildComfortBot?start=consult';
+            } else if (type === 'phone') {
+                url = 'tel:+74951234567';
+            }
+            window.open(url, '_blank');
+        }
+
+        // === Form Submission ===
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('formName').value.trim();
+            const phone = document.getElementById('formPhone').value.trim();
+            const product = document.getElementById('formProduct').value;
+            const comment = document.getElementById('formComment').value.trim();
+
+            if (!name || !phone) {
+                showFormMessage('Пожалуйста, заполните имя и телефон.', 'error');
+                return false;
+            }
+
+            const msg = encodeURIComponent(
+                'Новая заявка с сайта Билд Комфорт:\n' +
+                'Имя: ' + name + '\n' +
+                'Телефон: ' + phone + '\n' +
+                (product ? 'Продукция: ' + product + '\n' : '') +
+                (comment ? 'Комментарий: ' + comment : '')
+            );
+            const tgUrl = 'https://t.me/BuildComfortBot?start=' + Date.now() + '&msg=' + msg;
+            window.open(tgUrl, '_blank');
+
+            showFormMessage('Спасибо! Ваша заявка отправлена. Мы свяжемся с вами в ближайшее время.', 'success');
+            e.target.reset();
+            return false;
+        }
+
+        function showFormMessage(text, type) {
+            const el = document.getElementById('formMessage');
+            el.textContent = text;
+            el.className = 'form-message ' + type;
+            setTimeout(() => { el.className = 'form-message'; }, 5000);
+        }
+    </script>
+</body>
+</html>
